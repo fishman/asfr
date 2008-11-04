@@ -1,0 +1,20 @@
+CPP = g++
+RM = del
+CFLAGS = -O2 -Wall -D__WIN32__
+LIBS = -lws2_32
+
+SRCS = asfr.cpp helper.cpp status.cpp core\asf_helper.cpp core\asf_net.cpp core\asf_redirection.cpp core\mmsh\core_mmsh.cpp core\mmst\core_mmst.cpp
+OBJS = $(SRCS:.cpp=.o)
+TARGET = asfr.exe
+
+.cpp.o:
+	$(CPP) -c $< -o $*.o $(CFLAGS)
+
+all: $(TARGET)
+
+$(TARGET): $(OBJS)
+	$(CPP) -o $(TARGET) $^ $(LIBDIR) $(LIBS) $(CFLAGS)
+
+clean:
+	$(RM) $(OBJS)
+	$(RM) $(TARGET)

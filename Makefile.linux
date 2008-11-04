@@ -1,0 +1,20 @@
+CPP = g++
+RM = rm -f
+CFLAGS = -Wall -O2 -D__LINUX__ -D_GNU_SOURCE
+LIBS = -lpthread
+
+SRCS = asfr.cpp helper.cpp status.cpp core/asf_helper.cpp core/asf_net.cpp core/asf_redirection.cpp core/mmsh/core_mmsh.cpp core/mmst/core_mmst.cpp
+OBJS = $(SRCS:.cpp=.o)
+TARGET = asfr
+
+.cpp.o:
+	$(CPP) -c $< -o $*.o $(CFLAGS)
+
+all: $(TARGET)
+
+$(TARGET): $(OBJS)
+	$(CPP) -o $(TARGET) $^ $(LIBDIR) $(LIBS) $(CFLAGS)
+
+clean:
+	$(RM) $(OBJS)
+	$(RM) $(TARGET)
